@@ -21,3 +21,15 @@ export function sendReport(name,quizId,count,correct,wrong){
 export function getReports(){
     return iaxios.get('reports/')
 }
+
+export function getQuizList(){
+    return iaxios.get('quizes/')
+}
+
+export function createQuiz(title){
+    return iaxios.post('quizes/',{title})
+}
+
+export function deleteQuiz(id){
+    return iaxios.delete(`quizes/${id}/`)
+}

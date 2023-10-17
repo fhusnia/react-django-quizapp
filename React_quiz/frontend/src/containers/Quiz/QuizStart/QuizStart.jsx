@@ -1,5 +1,5 @@
 import React from 'react'
-import { getQuestions } from '../../../api/quizApi'
+import {getQuestions } from '../../../api/quizApi'
 import Question from '../../../components/Question/Question'
 import Timer from '../../../components/Timer/Timer'
 import { sendReport } from '../../../api/quizApi'
