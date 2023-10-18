@@ -61,7 +61,7 @@ function EditMenu(props) {
         </div>
         <div className='flex justify-end'>
             <input value={newTitle} onChange={titleChangeHandler} type="text" className={classNames('text-xl border-2 cursor-pointer p-2 grow',{'border-stone-500': !warning,'border-red-600 border-3':warning})}/>
-            <div onClick={addQuizHandler} className='p-2 bg-sky-600 rounded-sm cursor-pointer text-xl font-bold text-white'>Add Quiz</div>
+            <div onClick={addQuizHandler} className='p-2 bg-blue-900 rounded-sm cursor-pointer text-xl font-bold text-white'>Add Quiz</div>
         </div>
 
     </div>

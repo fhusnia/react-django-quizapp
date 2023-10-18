@@ -14,11 +14,11 @@ function EditQuiz(props) {
 
   return (
     <div>
-        <div className='text-xl text-center font-bold'>Edit Quiz</div>
+        <div className='text-2xl text-center p-2  font-bold'>Edit Quiz</div>
         <div>
             {quiz.questions && quiz.questions.map((question,index) => {
                 return(
-                    <div key={question.id} className='w-9/12 m-auto mb-5'>
+                    <div key={question.id} className='w-9/12 p-3 m-auto mb-5'>
                         <EditQuestion question={question} index={index}/>
                     </div>
                 )

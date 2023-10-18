@@ -2,8 +2,12 @@ import './App.css';
 import Layout from './HOC/Layout/Layout';
 import React from 'react';
 import Quiz from './containers/Quiz/Quiz';
-import Edit from './containers/Edit/Edit';
-import Report from './containers/Report/Report';
+// import Edit from './containers/Edit/Edit';
+// import Report from './containers/Report/Report';
+
+
+const Edit = React.lazy(() => import('./containers/Edit/Edit'))
+const Report = React.lazy(() => import('./containers/Report/Report'))
 
 
 export const appContext = React.createContext()
@@ -17,9 +21,13 @@ function App() {
       case 'quiz':
         return <Quiz/>
       case 'edit':
-        return <Edit/>
+        return <React.Suspense fallback={<div>Loading...</div>}>
+                    <Edit/> 
+              </React.Suspense>            
       case 'report':
-        return <Report/>
+        return<React.Suspense fallback={<div>Loading...</div>}>
+                    <Report/>
+              </React.Suspense>  
       default:
         return
      }

@@ -1,0 +1,9 @@
+*.log 
+node_modules/
+config.json
+.venv
+.vscode/
+media/
+static/
+build/
+dist/

@@ -1,65 +1,81 @@
 import React from 'react'
-
-const initialOptions = [
-        
-]
+import { BsFillTrashFill, BsPlusCircleFill,BsCheckCircle,BsFillCheckCircleFill } from "react-icons/bs";
 
 
-// const loadOptionsAction = (state,action) =>{
+const initialOptions = {
+    content: '',
+    options: []
+}
 
-// }
+
+
 const reducer = (state,action) => {
     switch(action.type){
-        case 'LOAD_OPTIONS':
-            return action.options
+        case 'LOAD_QUESTION':
+            return action.question
+        case 'CHANGE_CONTENT':
+            return {...state,content: action.content}
         default:
             return state
     }
 }
 
 function EditQuestion(props) {
-  const[content,setContent] = React.useState('')
-  const[options,dispatch] = React.useReducer(reducer,initialOptions)
+  const[question,dispatch] = React.useReducer(reducer,initialOptions);
+  const[changed,setChanged] = React.useState(false);
   const textAreaRef = React.useRef()
 
     const changeContentHandler = React.useCallback((e) =>{
-        setContent(e.target.value)
-        const textAreaEl = textAreaRef.current
-        textAreaEl.style.height = '1px';
-        textAreaEl.style.height = textAreaEl.scrollHeight + 'px'
+        dispatch({type:'CHANGE_CONTENT',content: e.target.value})
+        setChanged(true)
     },[])
 
 
   React.useEffect(() => {
-    setContent(props.question.content)
-    dispatch({type: 'LOAD_OPTIONS',options:props.question.options})
+    dispatch({type: 'LOAD_QUESTION',question:props.question})
   },[props.question])
 
-
+    React.useEffect(() =>{    
+        const textAreaEl = textAreaRef.current
+        if(textAreaEl){
+            textAreaEl.style.height = '1px';
+            textAreaEl.style.height = textAreaEl.scrollHeight + 'px';
+        }
+    },[textAreaRef,question.content])
 
   return (
-    <div className='w-full bg-slate-200 p-3 pl-1 rounded'>
+    <div className='w-full bg-slate-200 p-3 pl-1 rounded relative'>
+
+        <div className='self-center absolute right-[-25px] top-[-20px] text-3xl text-red-600  cursor-pointer p-2'><BsFillTrashFill/></div>
+        {changed && <div className='self-center absolute right-[-28px] bottom-[-12px] text-3xl text-green-700  cursor-pointer p-3'><BsCheckCircle/></div>}
+
         <div className='flex mb-3'>
-            <div className='w-8 text-center text-xl font-bold'>1</div>
+            <div className='w-8 text-center text-xl font-bold'>{props.index + 1}</div>
             <textarea 
             type="text" 
             className='resize-none w-full rounded p-3 outline-none' 
             rows={5}
-            value={content}
+            value={question.content}
             onChange={changeContentHandler}
             ref={textAreaRef}
             />
+
         </div>
         <div>
-            {options.map((option,index) => {
+            {question.options.map((option,index) => {
                 return(
                     <div  key={option.id} className='flex items-center mb-3'>
-                        <span className='w-8 text-center'>A)</span>
-                        <input type="text" className='w-full rounded p-1 outline-none'/>
+                        <span className='w-8 text-center'>{String.fromCharCode(index+65)})</span>
+                        <input value={option.answer} type="text" className='w-full rounded p-1 outline-none mr-2'/>
+                        <div className="text-green-700 mr-2  cursor-pointer"><BsFillCheckCircleFill/></div>
+                        <div className="text-red-600 cursor-pointer"><BsFillTrashFill/></div>
+
                     </div>
                 )
             })}
-           
+           <div className="flex justify-center text-3xl text-blue-900 cursor-pointer">
+                <BsPlusCircleFill/>
+           </div>
         </div>
     </div>
   )
