@@ -7,6 +7,18 @@ export function getQuestions(quizId){
 }
 
 
+export function createQuestion(question){
+    return iaxios.post('questions/',question)
+}
+
+export function changeQuestion(id,questionData){
+    return iaxios.put(`questions/${id}/`,questionData)
+}
+
+export function deleteQuestion(id){
+    return iaxios.delete(`questions/${id}/`)
+}
+
 export function sendReport(name,quizId,count,correct,wrong){
     const data = {
         full_name: name,
@@ -32,4 +44,8 @@ export function createQuiz(title){
 
 export function deleteQuiz(id){
     return iaxios.delete(`quizes/${id}/`)
+}
+
+export function changeQuizName(id,title){
+    return iaxios.patch(`quizes/${id}/`,{title})
 }

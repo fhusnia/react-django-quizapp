@@ -90,11 +90,23 @@ function EditQuestion(props) {
         }
     },[textAreaRef,question.content])
 
+    const saveQuestion = React.useCallback(() =>{
+        const questionData = {
+            id: props.question.id,
+            content: question.content,
+            options_data: question.options.map(option =>({
+                answer: option.answer,
+                correct: option.correct
+            }))
+        }
+        props.onChangeQuestion(questionData)
+    },[props,question])
+
   return (
     <div className='w-full bg-slate-200 p-3 pl-1 rounded relative'>
 
         <div onClick={props.onDelete} className='self-center absolute right-[-25px] top-[-20px] text-3xl text-red-600  cursor-pointer p-2'><BsFillTrashFill/></div>
-        {question.changed && <div className='self-center absolute right-[-28px] bottom-[-12px] text-3xl text-green-700  cursor-pointer p-3'><BsCheckCircle/></div>}
+        {question.changed && <div onClick={saveQuestion} className='self-center absolute right-[-28px] bottom-[-12px] text-3xl text-green-700  cursor-pointer p-3'><BsCheckCircle/></div>}
 
         <div className='flex mb-3'>
             <div className='w-8 text-center text-xl font-bold'>{props.index + 1}</div>

@@ -29,7 +29,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/Users/macbook/Desktop/septemberReactstart/React_quiz/backend/venv"
+set -gx VIRTUAL_ENV "/Users/macbook/Desktop/react-django-quizapp/React_quiz/backend/venv"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH

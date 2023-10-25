@@ -140,6 +140,8 @@ function QuizStart(props) {
 
   },[finished])
 
+
+
   const cancelHandler = React.useCallback(() =>{
     localStorage.removeItem('quizId')
     localStorage.removeItem('quizTitle')
@@ -158,7 +160,7 @@ function QuizStart(props) {
       <div className='grid grid-cols-3 w-full gap-3 mx-auto mb-4 text-center font-bold' >
         <div style={divStyle} className=' text-slate-50 rounded-md'>Student: {name}</div>
         <div style={divStyle}  className='text-slate-50 rounded-md'>Question Count: {questions.length}</div>
-        <div  style={divStyle} className='text-slate-50 rounded-md'><Timer duration={10} onEnd={(submit)} /></div>
+        <div  style={divStyle} className='text-slate-50 rounded-md'><Timer finished={finished}   duration={10} onEnd={(submit)} /></div>
 
       </div>
       <div className="flex justify-center flex-wrap">

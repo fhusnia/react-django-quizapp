@@ -12,8 +12,9 @@ function Timer(props) {
                     if (val <= 1){
                         setEnded(true)
                         clearInterval(interval)
+                    }else{
+                        localStorage.setItem('timer',val-1)
                     }
-                    localStorage.setItem('timer',val-1)
                     return val - 1 
                 })
             },1000);
@@ -29,6 +30,14 @@ function Timer(props) {
             props.onEnd()
         }
     },[ended,props])
+
+    React.useEffect(()=> {
+        if(props.finished){
+            setDuration(1)
+            setEnded(true)
+        }
+    },[props.finished])
+
 
     React.useEffect(() =>{
         const remainingDuration = localStorage.getItem('timer')

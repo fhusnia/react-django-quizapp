@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/Users/macbook/Desktop/septemberReactstart/React_quiz/backend/venv"
+VIRTUAL_ENV="/Users/macbook/Desktop/react-django-quizapp/React_quiz/backend/venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
